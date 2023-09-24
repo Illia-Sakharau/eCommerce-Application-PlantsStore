@@ -6,6 +6,7 @@ const EslingPlugin = require('eslint-webpack-plugin');
 const { merge } = require('webpack-merge');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (_env, options) => {
     const isProduction = options.mode === 'production';
@@ -69,7 +70,8 @@ module.exports = (_env, options) => {
                     to: path.resolve(__dirname, './dist/img/category')
                   }
                 ]
-              })
+            }),
+            new Dotenv(),              
         ],
     };
 

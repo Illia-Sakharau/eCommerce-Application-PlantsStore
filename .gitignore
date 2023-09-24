@@ -6,3 +6,5 @@ dist/
 
 # MAC files
 .DS_Store
+
+.env

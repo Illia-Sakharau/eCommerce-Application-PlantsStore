@@ -14,33 +14,37 @@ import {
     RefreshAuthMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 
-const CTP_PROJECT_KEY = 'ecom_app';
-const CTP_CLIENT_SECRET = 'SOD9EBG_EpE0m8SVaeJa5DaIWQnT6sm2';
-const CTP_CLIENT_ID = 'Kw1PsiB2LYvTBb6ClYXf2qRB';
-const CPT_AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com';
-const CPT_API_URL = 'https://api.europe-west1.gcp.commercetools.com';
-const CPT_SCOPES = [
-    'view_cart_discounts:ecom_app manage_orders:ecom_app view_project_settings:ecom_app manage_my_shopping_lists:ecom_app manage_customers:ecom_app view_messages:ecom_app view_published_products:ecom_app introspect_oauth_tokens:ecom_app manage_my_profile:ecom_app view_shipping_methods:ecom_app create_anonymous_token:ecom_app manage_products:ecom_app manage_shopping_lists:ecom_app view_shopping_lists:ecom_app view_payments:ecom_app view_orders:ecom_app view_categories:ecom_app view_discount_codes:ecom_app manage_my_orders:ecom_app',
-];
+// eslint-disable-next-line no-undef
+const CTP_PROJECT_KEY = `${process.env.CTP_PROJECT_KEY}`;
+// eslint-disable-next-line no-undef
+const CTP_CLIENT_SECRET = `${process.env.CTP_CLIENT_SECRET}`;
+// eslint-disable-next-line no-undef
+const CTP_CLIENT_ID = `${process.env.CTP_CLIENT_ID}`;
+// eslint-disable-next-line no-undef
+const CTP_AUTH_URL = `${process.env.CTP_AUTH_URL}`;
+// eslint-disable-next-line no-undef
+const CTP_API_URL = `${process.env.CTP_API_URL}`;
+// eslint-disable-next-line no-undef
+const CTP_SCOPES = [`${process.env.CTP_SCOPES}`];
 const ANONYMOUS_ID = 'idAnonym1';
 
 export const myToken = new MyToken();
 
 // Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-    host: CPT_AUTH_URL,
+    host: CTP_AUTH_URL,
     projectKey: CTP_PROJECT_KEY,
     credentials: {
         clientId: CTP_CLIENT_ID,
         clientSecret: CTP_CLIENT_SECRET,
     },
-    scopes: CPT_SCOPES,
+    scopes: CTP_SCOPES,
     fetch,
 };
 
 // Configure httpMiddlewareOptions
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
-    host: CPT_API_URL,
+    host: CTP_API_URL,
     fetch,
 };
 
@@ -60,7 +64,7 @@ const anonymousMiddlewareOptions: AnonymousAuthMiddlewareOptions = {
 
 function getPasswordFlowOptions(username: string, password: string) {
     const options: PasswordAuthMiddlewareOptions = {
-        host: CPT_AUTH_URL,
+        host: CTP_AUTH_URL,
         projectKey: CTP_PROJECT_KEY,
         credentials: {
             clientId: CTP_CLIENT_ID,
@@ -71,7 +75,7 @@ function getPasswordFlowOptions(username: string, password: string) {
             },
         },
         tokenCache: myToken,
-        scopes: CPT_SCOPES,
+        scopes: CTP_SCOPES,
         fetch,
     };
     return options;
