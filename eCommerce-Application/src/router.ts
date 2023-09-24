@@ -30,7 +30,7 @@ export class Router {
         } else if (host.includes('127.0.0.1')) {
             this.basePath = '/eCommerce-Application/eCommerce-Application/dist/';
         } else {
-            this.basePath = '/eCommerce-sprint4-deploy/';
+            this.basePath = '/eCommerce-Application-PlantsStore/';
         }
         this.navigate();
     }
@@ -42,7 +42,7 @@ export class Router {
         } else if (host.includes('127.0.0.1')) {
             return 'eCommerce-Application/eCommerce-Application/dist/';
         } else {
-            return 'eCommerce-sprint4-deploy/';
+            return 'eCommerce-Application-PlantsStore/';
         }
     }
 
