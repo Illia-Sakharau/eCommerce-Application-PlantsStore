@@ -49,16 +49,14 @@ const httpMiddlewareOptions: HttpMiddlewareOptions = {
 };
 
 const anonymousMiddlewareOptions: AnonymousAuthMiddlewareOptions = {
-    host: 'https://auth.europe-west1.gcp.commercetools.com',
-    projectKey: 'ecom_app',
+    host: CTP_AUTH_URL,
+    projectKey: CTP_PROJECT_KEY,
     credentials: {
         clientId: CTP_CLIENT_ID,
         clientSecret: CTP_CLIENT_SECRET,
         anonymousId: ANONYMOUS_ID,
     },
-    scopes: [
-        'view_cart_discounts:ecom_app manage_orders:ecom_app view_project_settings:ecom_app manage_my_shopping_lists:ecom_app manage_customers:ecom_app view_messages:ecom_app view_published_products:ecom_app manage_my_profile:ecom_app view_shipping_methods:ecom_app manage_shopping_lists:ecom_app view_shopping_lists:ecom_app view_payments:ecom_app view_orders:ecom_app view_categories:ecom_app view_discount_codes:ecom_app manage_my_orders:ecom_app',
-    ],
+    scopes: CTP_SCOPES,
     fetch,
 };
 
