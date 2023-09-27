@@ -8,7 +8,6 @@ import GitHubLink from '../link-github/link-github';
 import lightLogoImg from '../../assets/logo-light.svg';
 import rssLogoImg from '../../assets/rss-logo.svg';
 import NavigationBar from '../navigation-bar/navigation-bar';
-import { AppStore } from '../../store/app-store';
 import { RouteAction } from '../../store/action/routeAction';
 
 const CreatorsGithubInfo: CreatorGithubInfo[] = [
@@ -37,16 +36,14 @@ const FooterNavLinks: LinkProps[] = [
 ];
 
 export default class Footer extends Component {
-    private appStore: AppStore;
     private routeAction: RouteAction = new RouteAction();
 
-    constructor(appStore: AppStore) {
+    constructor() {
         const footerParams: ElementParams = {
             tag: 'footer',
             classes: ['footer'],
         };
         super(footerParams);
-        this.appStore = appStore;
         this.render();
     }
 
@@ -64,7 +61,7 @@ export default class Footer extends Component {
     private createTopLine(): HTMLElement {
         const topLineEl = createElement({ tag: 'div', classes: ['footer__top-line'] });
         const logoEl = htmlToElement(`<a class="footer__logo">${lightLogoImg}</div>`);
-        const menuEl = new NavigationBar(this.appStore, FooterNavLinks, 'light').getComponent();
+        const menuEl = new NavigationBar(FooterNavLinks, 'light').getComponent();
         menuEl.classList.add('footer__menu');
         logoEl.addEventListener('click', () => this.routeAction.changePage({ addHistory: true, page: PageName.INDEX }));
 

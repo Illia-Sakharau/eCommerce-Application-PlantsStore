@@ -1,5 +1,4 @@
 import './cart.scss';
-import { AppStore } from '../../store/app-store';
 import createElement from '../../utils/create-element';
 import { Page } from '../abstract/page';
 import { CartActions } from '../../store/action/cartActions';
@@ -16,6 +15,7 @@ const EMPTY_CART_TITLE = `Your home is missing something... a little green!`;
 const EMPTY_CART_MESSAGE = `Take a look at our curated plant collections to find the perfect addition to your space.`;
 
 export class CartPage extends Page {
+    private cartStore = new CartStore();
     private cartAction = new CartActions();
     private routeAction = new RouteAction();
     private promoInput?: InputField;
@@ -25,7 +25,7 @@ export class CartPage extends Page {
     private promoRemoveButton?: Button;
     private loaderEl = new Loader().getComponent();
 
-    constructor(private appStore: AppStore, private cartStore: CartStore) {
+    constructor() {
         super();
         this.cartStore.addChangeListener(StoreEventType.CART_ITEM_AMOUNT_CHANGE, this.render.bind(this));
         this.cartStore.addChangeListener(StoreEventType.CART_INC_ITEM, () => this.updateTotal());

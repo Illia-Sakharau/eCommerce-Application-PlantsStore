@@ -10,16 +10,17 @@ import { CartStore } from '../../store/cart-store';
 import { CartInteractionBar } from '../../components/cart-interactions-bar/cart-interactions-bar';
 
 export class ProductPage extends Page {
-    private productStore: ProductStore;
+    private appStore = new AppStore();
+    private cartStore = new CartStore();
+    private productStore = new ProductStore();
     private data?: ProductData;
 
     private slider?: Slider;
     private modalSlider?: Slider;
     private modal?: Modal;
 
-    constructor(private appStore: AppStore, private cartStore: CartStore) {
+    constructor() {
         super();
-        this.productStore = new ProductStore();
     }
 
     public async render(): Promise<void> {

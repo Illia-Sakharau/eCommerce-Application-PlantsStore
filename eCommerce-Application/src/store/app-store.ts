@@ -90,14 +90,19 @@ export const PROMO_CODES_INFO: PromocodeInfo[] = [
 export class AppStore extends Store {
     private currentPage: PageName;
     private currentPageResource?: string;
-    private router: Router;
     private isAnonUser: boolean;
+    private router = new Router();
+    static _instance: AppStore;
 
-    constructor(router: Router) {
+    constructor() {
         super();
-        this.router = router;
         this.currentPage = PageName.INDEX;
         this.isAnonUser = !localStorage.getItem('token');
+
+        if (!AppStore._instance) {
+            AppStore._instance = this;
+        }
+        return AppStore._instance;
     }
 
     public getCurrentPage(): PageName {

@@ -30,9 +30,16 @@ export class RegistrationStore extends Store {
     private email?: string;
     private password?: string;
 
+    static _instance: RegistrationStore;
+
     constructor() {
         super();
         this.validationErrors = {};
+
+        if (!RegistrationStore._instance) {
+            RegistrationStore._instance = this;
+        }
+        return RegistrationStore._instance;
     }
 
     public getValidationErrors(): RegValidationErrors | undefined {

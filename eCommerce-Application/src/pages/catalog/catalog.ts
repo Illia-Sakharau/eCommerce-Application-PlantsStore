@@ -82,7 +82,9 @@ type CatalogPageData = {
 };
 
 export class CatalogPage extends Page {
-    private routeAction: RouteAction;
+    private appStore = new AppStore();
+    private cartStore = new CartStore();
+    private routeAction = new RouteAction();
     private categoriesBarEl = createElement({ tag: 'section', classes: ['categories-bar'] });
     private innerEl = createElement({ tag: 'div', classes: ['catalog-inner'] });
     private pageInfo: CatalogPageData;
@@ -92,10 +94,9 @@ export class CatalogPage extends Page {
     private productsData: EcomProductData[] | undefined;
     private totalProducts = 0;
 
-    constructor(private appStore: AppStore, private cartStore: CartStore) {
+    constructor() {
         super();
         this.html = document.createElement('div');
-        this.routeAction = new RouteAction();
         this.pageInfo = {
             currentCategories: 'all plants',
             currentPage: 1,

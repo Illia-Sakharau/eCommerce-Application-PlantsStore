@@ -18,7 +18,7 @@ const SUCCESS_REGISTARTION_TEMPLATE = `Congratulations! You have successfully re
 You will be automatically redirected to the Home page.`;
 
 export class RegisterPage extends Page {
-    private appStore: AppStore;
+    private appStore = new AppStore();
     private registrationStore: RegistrationStore;
     private registrationAction: RegistrationAction;
 
@@ -34,9 +34,8 @@ export class RegisterPage extends Page {
     private button: Button;
     private successField: HTMLElement;
 
-    constructor(appStore: AppStore) {
+    constructor() {
         super();
-        this.appStore = appStore;
         this.registrationStore = new RegistrationStore();
         this.registrationAction = new RegistrationAction();
 
@@ -73,7 +72,7 @@ export class RegisterPage extends Page {
     }
 
     private createWrapper(): HTMLElement {
-        const wrapper = new LoginWrapper(this.appStore, 'Registration', this.createFields(), this.button);
+        const wrapper = new LoginWrapper('Registration', this.createFields(), this.button);
         return wrapper.getComponent();
     }
 

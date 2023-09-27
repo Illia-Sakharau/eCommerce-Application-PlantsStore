@@ -24,7 +24,7 @@ import { ClientResponse, Customer } from '@commercetools/platform-sdk';
 import { checkboxChecking } from '../../utils/checkbox-checking';
 
 export class AccountPage extends Page {
-    private appStore: AppStore;
+    private appStore = new AppStore();
     private buttonEditPassword: Button;
     private buttonAddress: Button;
     private accountStore?: AccountStore;
@@ -52,9 +52,8 @@ export class AccountPage extends Page {
     private editEmailButton: IconButton;
     private apiError: HTMLElement;
 
-    constructor(appStore: AppStore) {
+    constructor() {
         super();
-        this.appStore = appStore;
         this.accountAction = new AcountAction();
         this.buttonEditPassword = new Button('bordered', 'button-edit', 'Edit Password');
         this.editEmailButton = new IconButton({ icon: bottonEdit, type: 'clear' });

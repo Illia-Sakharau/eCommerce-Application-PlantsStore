@@ -33,22 +33,24 @@ const HeaderNavLinks: LinkProps[] = [
 ];
 
 export default class Header extends Component {
+    private appStore = new AppStore();
+    private cartStore = new CartStore();
+
     private routeAction: RouteAction = new RouteAction();
     private userAction: UserTypeAction = new UserTypeAction();
-    private isAnonUser: boolean;
+    private isAnonUser = this.appStore.getIsAnonUser();
 
     private mediaQuery = window.matchMedia('(max-width: 768px)');
     private isMobile = this.handleMobileChange(this.mediaQuery);
-    private navigationBar = new NavigationBar(this.appStore, HeaderNavLinks, 'dark').getComponent();
+    private navigationBar = new NavigationBar(HeaderNavLinks, 'dark').getComponent();
 
-    constructor(private appStore: AppStore, private cartStore: CartStore) {
+    constructor() {
         const headerParams: ElementParams = {
             tag: 'header',
             classes: ['header'],
         };
         super(headerParams);
         this.appStore.addChangeListener(StoreEventType.USER_TYPE_CHANGE, this.onUserType.bind(this));
-        this.isAnonUser = this.appStore.getIsAnonUser();
         this.mediaQuery.addEventListener('change', (e) => this.handleMobileChange(e));
         this.render();
     }
@@ -195,11 +197,7 @@ export default class Header extends Component {
     private createAccountMenu(): HTMLElement {
         const accountMenuEl = createElement({ tag: 'div', classes: ['header__sub-menu'] });
         const logoutBtnEl = this.createLogoutButton();
-        const navBar = new NavigationBar(
-            this.appStore,
-            [{ page: PageName.ACCOUNT, text: 'Account' }],
-            'dark'
-        ).getComponent();
+        const navBar = new NavigationBar([{ page: PageName.ACCOUNT, text: 'Account' }], 'dark').getComponent();
 
         accountMenuEl.append(navBar, logoutBtnEl);
         return accountMenuEl;

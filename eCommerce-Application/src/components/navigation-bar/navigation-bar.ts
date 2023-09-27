@@ -6,18 +6,17 @@ import { RouteAction } from '../../store/action/routeAction';
 import { AppStore } from '../../store/app-store';
 
 export default class NavigationBar extends Component {
-    protected appStore: AppStore;
+    private appStore = new AppStore();
     private routeAction: RouteAction = new RouteAction();
     private selectedEl?: HTMLElement;
     private navEl: HTMLElement[] = [];
 
-    constructor(appStore: AppStore, linksProps: LinkProps[], color: 'light' | 'dark' = 'dark') {
+    constructor(linksProps: LinkProps[], color: 'light' | 'dark' = 'dark') {
         const navigationBarParams: ElementParams = {
             tag: 'nav',
             classes: ['nav-bar'],
         };
         super(navigationBarParams);
-        this.appStore = appStore;
         this.render(linksProps, color);
         this.init();
     }

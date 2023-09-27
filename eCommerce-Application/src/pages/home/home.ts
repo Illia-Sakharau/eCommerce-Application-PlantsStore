@@ -42,9 +42,10 @@ The 'Account' page is only available to authorized users.`;
 
 export class HomePage extends Page {
     private routeAction: RouteAction;
-    private implimentedPages = new NavigationBar(this.appStore, ImplimentedPages, 'dark').getComponent();
+    private appStore = new AppStore();
+    private implimentedPages = new NavigationBar(ImplimentedPages, 'dark').getComponent();
 
-    constructor(private appStore: AppStore) {
+    constructor() {
         super();
         this.routeAction = new RouteAction();
     }
@@ -126,7 +127,6 @@ export class HomePage extends Page {
             navigator.clipboard
                 .writeText(code)
                 .then(() => {
-                    // window.alert(`Code "${code}" copied!`);
                     cardEl.classList.add('promo-card_copied');
                 })
                 .catch(() => {

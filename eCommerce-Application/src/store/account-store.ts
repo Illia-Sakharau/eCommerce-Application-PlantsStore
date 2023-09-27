@@ -23,6 +23,8 @@ export class AccountStore extends Store {
     private adresses: Address[];
     private summaryErrors?: RegSummaryErrors;
 
+    static _instance: AccountStore;
+
     constructor() {
         super();
         this.validationErrors = {};
@@ -33,6 +35,11 @@ export class AccountStore extends Store {
         this.email = '';
         this.adresses = [];
         this.version = this.getVersionAPI();
+
+        if (!AccountStore._instance) {
+            AccountStore._instance = this;
+        }
+        return AccountStore._instance;
     }
     public getSummaryErrors(): RegSummaryErrors | undefined {
         return this.summaryErrors;

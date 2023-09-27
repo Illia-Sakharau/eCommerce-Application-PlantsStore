@@ -6,25 +6,25 @@ import { LoginActionData } from './action/loginAction';
 import CustomerAPI from '../api/customerAPI';
 import { Validation, ValidationResult } from '../utils/validation';
 import { RouteAction } from './action/routeAction';
-import { AppStore } from './app-store';
 import CartAPI from '../api/cartAPI';
 import { getAPIRootWithExistingTokenFlow } from '../api/client';
-import { CartActions } from './action/cartActions';
 
 export type LoginValidationErrors = Partial<LoginActionData>;
 
 export class LoginStore extends Store {
-    private validationErrors: LoginValidationErrors;
+    private validationErrors: LoginValidationErrors = {};
     private loginError?: string;
-    private routeAction: RouteAction;
-    private appStore: AppStore;
-    private cartAction: CartActions = new CartActions();
+    private routeAction = new RouteAction();
 
-    constructor(appStore: AppStore) {
+    static _instance: LoginStore;
+
+    constructor() {
         super();
-        this.validationErrors = {};
-        this.routeAction = new RouteAction();
-        this.appStore = appStore;
+
+        if (!LoginStore._instance) {
+            LoginStore._instance = this;
+        }
+        return LoginStore._instance;
     }
 
     public getValidationErrors(): LoginValidationErrors | undefined {
